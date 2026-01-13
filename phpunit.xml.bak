@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="vendor/autoload.php"
+    colors = "true"
+    stopOnFailure="false"
+    executionOrder="random"
+    resolveDependencies="true">
+
+<testsuites>
+    <testsuite name="csrfTest">
+        <directory>tests</directory>
+    </testsuite>
+</testsuites>
+<filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <!-- Include the paths you want to include for code coverage -->
+            <directory suffix=".php">func</directory>
+            <!-- Additional directories or files can be added here -->
+        </whitelist>
+    </filter>
+    </phpunit>

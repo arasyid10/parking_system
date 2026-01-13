@@ -1,0 +1,60 @@
+<?php
+
+use Carbon\Traits\ToStringFormat;
+use PHPStan\Rules\Deprecations\TypeHintDeprecatedInClassMethodSignatureRule;
+use PHPUnit\Framework\TestCase;
+use GuzzleHttp\Client;
+use SecurityService\securityService;
+include "securityService.php";
+class cobaClient 
+{
+    private $baseUrl; // URL dari aplikasi web Anda
+    private $csrfToken; // Simpan token CSRF di sini
+
+    function tesAja()
+    {
+        return 123;
+    }
+    
+     function setUp()
+    {
+        // Atur URL dari aplikasi web Anda
+        $this->baseUrl = 'http://localhost:8081/samplecode/parking-system/visa.php';
+
+        // Dapatkan token CSRF dari aplikasi web Anda
+        //$this->csrfToken = $this->getCsrfToken();
+        $hash = new securityService;
+        $this->csrfToken = $hash->getCSRFToken();
+       return $hash->getCSRFToken();
+    }
+    private function getCsrfToken()
+    {
+        // Lakukan permintaan GET untuk mendapatkan formulir dengan token CSRF
+        $client = new Client();
+        //$response = $client->get($this->baseUrl . '/csrf-form');
+        $response = $client->get($this->baseUrl );
+        // Parse halaman untuk mendapatkan token CSRF
+        $body = (string)$response->getBody();
+        //echo "RESPON = ". $response.ToStringFormat() ." , BODY = $body";
+        preg_match('/<input type="hidden" name="token" value="<?php $_SESSION[token] ?>">"/', $body, $matches);
+
+        if (isset($matches[1])) {
+            return $matches[1];
+        }
+        return null;
+    }
+    private function sendRequest($method, $endpoint, $data)
+    {
+        // Kirim permintaan dengan metode dan data yang diberikan
+        $client = new Client();
+        
+        return $client->request($method, $this->baseUrl . $endpoint, [
+            'form_params' => $data
+        ]);
+    }
+}
+
+ $coba = new cobaClient;
+ echo $coba->tesAja();
+ echo $coba->setUp();
+?>
