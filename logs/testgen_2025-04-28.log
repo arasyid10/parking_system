@@ -1,0 +1,3 @@
+[2025-04-28 11:16:07][DEBUG] Calling Abacus API with prompt length: 1242
+[2025-04-28 11:16:07][ERROR] API call failed: cURL error 3:  (see https://curl.haxx.se/libcurl/c/libcurl-errors.html)
+[2025-04-28 11:16:07][ERROR] Error generating test cases: Failed to generate test cases: cURL error 3:  (see https://curl.haxx.se/libcurl/c/libcurl-errors.html)
